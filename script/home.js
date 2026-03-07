@@ -9,7 +9,7 @@ fetch(url)
 
 const displayCard = (cards) => {
 
-  
+
 
   const cardContainer = document.getElementById("card-container");
 
@@ -22,9 +22,9 @@ const displayCard = (cards) => {
 
     const apiUpdateTime = card.updatedAt;
     const dateUpdateTime = new Date(apiUpdateTime).toLocaleDateString();
-    
+
     createDiv.innerHTML = `
-      <div class=" shadow-sm  border border-gray-300 rounded-md h-full ">
+      <div class=" shadow-sm flex-1 border border-gray-300 rounded-xl h-full hover:scale-105 duration-300  border-t-${card.status === "open" ? "green" : "blue"}-600 border-t-6 pt-5">
         <div class=" space-y-4 p-4">
           <div class="flex justify-between ">
             <div>
@@ -35,8 +35,8 @@ const displayCard = (cards) => {
           <h2 class="text-lg font-semibold">${card.title}</h2>
           <p class="text-sm">${card.description}</p>
           <div class="gap-2 flex flex-wrap">
-            <div class=" py-1 px-2 font-semibold rounded-full bg-[#EF444430] text-red-500 border border-red-300"><span><i class="fa-solid fa-bug"></i></span>${card.labels[0]}</div>
-            <div class="py-1 px-2 font-semibold rounded-full bg-orange-100 text-orange-400 border border-orange-300"><span><i class="fa-solid fa-circle-xmark"></i></span>${card.labels[1]  ? card.labels[1] : ""}</div>
+            <div class=" py-1 px-2 font-semibold rounded-full bg-[#EF444430] text-red-500 border border-red-300"><span><i class="${card.labels[0] == "bug" ? `fa-solid fa-bug` : card.labels[0] == "enhancement" ? `fa-solid fa-maximize` : `fa-solid fa-book-medical`}"></i></span>${card.labels[0]}</div>
+            <div class="py-1 px-2 font-semibold rounded-full bg-orange-${card.labels[1] ? 100 : 0} text-orange-400 ${card.labels[1] ? "border" : ""} border-orange-300"><span><i class="${card.labels[1] ? `fa-solid fa-circle-xmark` : ""}"></i></span>${card.labels[1] ? card.labels[1] : ""}</div>
           </div>
         </div>
         <div class="h-px border border-gray-300 "></div>
