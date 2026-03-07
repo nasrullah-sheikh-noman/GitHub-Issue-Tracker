@@ -36,7 +36,7 @@ const displayCard = (cards) => {
           <p class="text-sm">${card.description}</p>
           <div class="gap-2 flex flex-wrap">
             <div class=" py-1 px-2 font-semibold rounded-full bg-[#EF444430] text-red-500 border border-red-300"><span><i class="${card.labels[0] == "bug" ? `fa-solid fa-bug` : card.labels[0] == "enhancement" ? `fa-solid fa-maximize` : `fa-solid fa-book-medical`}"></i></span>${card.labels[0]}</div>
-            <div class="py-1 px-2 font-semibold rounded-full bg-orange-${card.labels[1] ? 100 : 0} text-orange-400 ${card.labels[1] ? "border" : ""} border-orange-300"><span><i class="${card.labels[1] ? `fa-solid fa-circle-xmark` : ""}"></i></span>${card.labels[1] ? card.labels[1] : ""}</div>
+            <div class="py-1 px-2 font-semibold rounded-full bg-orange-${card.labels[1] ? 100 : 0} text-orange-400 ${card.labels[1] ? "border" : ""} border-orange-300"><span><i class="${card.labels[1] == "help wanted" ? `fa-solid fa-circle-xmark` : card.labels[1] == "good first issue" ? `fa-solid fa-cannabis` : card.labels[1] == "enhancement" ? "fa-solid fa-maximize" : ""}"></i></span>${card.labels[1] ? card.labels[1] : ""}</div>
           </div>
         </div>
         <div class="h-px border border-gray-300 "></div>
