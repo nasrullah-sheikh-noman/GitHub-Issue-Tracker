@@ -37,12 +37,36 @@
       rel="stylesheet"
     />
 
-
     <!-- css file link  -->
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/style.css" />
   </head>
   <body>
-    <h2>github</h2>
+    <!-- login section  -->
+    <section class="flex justify-center items-center py-12">
+      <fieldset
+        class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-5"
+      >
+        <div>
+          <img class="flex mx-auto" src="./assets/github-logo.png" alt="">
+        </div>  
+
+        <div class="text-center space-y-2 mb-3">
+          <h2 class="font-bold text-xl">GitHub Issues Tracker</h2>
+          <p class="text-[#6B648B] text-sm" >Sign in to manage your issues</p>
+        </div>
+
+        <label class="label font-semibold text-sm">Username</label>
+        <input type="email" class="input" placeholder="Enter Username" />
+
+        <label class="label font-semibold text-sm">Password</label>
+        <input type="password" class="input" placeholder="Password" />
+
+        <button class="btn btn-primary mt-4">Sign In</button>
+
+        <h2 class="text-center mt-4">OR</h2>
+
+      </fieldset>
+    </section>
 
     <script src="./script/index.js"></script>
   </body>
