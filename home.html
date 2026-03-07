@@ -76,11 +76,11 @@
     </div>
 
     <!-- selection container  -->
-    <section class="max-w-[1200px] mx-auto mt-20 border border-gray-200 rounded-md shadow-sm p-4">
+    <section class="max-w-[1200px] mx-auto mt-8 border border-gray-200 rounded-md shadow-sm p-4 ">
       <div>
-        <button class="btn btn-active">All</button>
-        <button class="btn btn-active">Open</button>
-        <button class="btn btn-active">Closed</button>
+        <button id="select-all" class="btn btn-active sl">All</button>
+        <button id="select-open" class="btn btn-active sl">Open</button>
+        <button id="select-closed" class="btn btn-active sl">Closed</button>
       </div>
     </section>
 
@@ -99,11 +99,11 @@
             </div>
             <div class="flex gap-4 items-center ">
               <div class="flex items-center gap-2">
-                <div class="w-4 h-4 rounded-full bg-green-600"></div>
+                <div class="w-4 h-4 rounded-full bg-green-600 hover:scale-145 duration-300"></div>
                 <div>Open</div>
               </div>
               <div class="flex items-center gap-2">
-                <div class="w-4 h-4 rounded-full bg-blue-600"></div>
+                <div class="w-4 h-4 rounded-full bg-blue-600 hover:scale-145 duration-300"></div>
                 <div>Closed</div>
               </div>
             </div>

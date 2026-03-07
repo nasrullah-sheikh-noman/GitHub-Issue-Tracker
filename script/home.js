@@ -9,8 +9,6 @@ fetch(url)
 
 const displayCard = (cards) => {
 
-
-
   const cardContainer = document.getElementById("card-container");
 
   cards.forEach(card => {
@@ -30,15 +28,23 @@ const displayCard = (cards) => {
             <div>
               <img class="w-8" src="../assets/${card.status == "open" ? card.status : card.status}-Status.png" alt="" >
             </div>
-            <h4 class="bg-[#EF4444${card.priority == "high" ? 70 : card.priority == "medium" ? 40 : 25}] rounded-full px-7 py-1 font-semibold text-red-500">${card.priority}</h4>
+            <h4 class="bg-[#EF4444${card.priority == "high" ? 70 : card.priority == "medium" ? 40 : 25}] rounded-full px-7 py-1 font-semibold text-red-500 hover:scale-120 duration-300">${card.priority}</h4>
           </div>
+
           <h2 class="text-lg font-semibold">${card.title}</h2>
+
           <p class="text-sm">${card.description}</p>
-          <div class="gap-2 flex flex-wrap">
-            <div class=" py-1 px-2 font-semibold rounded-full bg-[#dd5aabab] text-[#8f055aaf] border border-red-300"><span><i class="${card.labels[0] == "bug" ? `fa-solid fa-bug` : card.labels[0] == "enhancement" ? `fa-solid fa-maximize` : card.labels[0] == "documentation" ? `fa-solid fa-book-medical` : ""}"></i></span>${card.labels[0]}</div>
-            <div class="py-1 px-2 font-semibold rounded-full bg-orange-${card.labels[1] ? 100 : 0} text-orange-400 ${card.labels[1] ? "border" : ""} border-orange-300"><span><i class="${card.labels[1] == "help wanted" ? `fa-solid fa-circle-xmark` : card.labels[1] == "good first issue" ? `fa-solid fa-cannabis` : card.labels[1] == "enhancement" ? "fa-solid fa-maximize" : ""}"></i></span>${card.labels[1] ? card.labels[1] : ""}</div>
+
+          <div class="gap-3 flex flex-wrap">
+
+            <div class=" py-1 px-2 font-semibold rounded-full bg-[#dd5aabab] text-[#8f055aaf] border border-red-300 hover:scale-115 duration-300"><span><i class="${card.labels[0] == "bug" ? `fa-solid fa-bug` : card.labels[0] == "enhancement" ? `fa-solid fa-maximize` : card.labels[0] == "documentation" ? `fa-solid fa-book-medical` : ""}"></i></span>${card.labels[0]}</div>
+
+            <div class="py-1 px-2 font-semibold hover:scale-115 duration-300 rounded-full bg-orange-${card.labels[1] ? 100 : 0} text-orange-400 ${card.labels[1] ? "border" : ""} border-orange-300"><span><i class="${card.labels[1] == "help wanted" ? `fa-solid fa-circle-xmark` : card.labels[1] == "good first issue" ? `fa-solid fa-cannabis` : card.labels[1] == "enhancement" ? "fa-solid fa-maximize" : ""}"></i></span>${card.labels[1] ? card.labels[1] : ""}</div>
+
           </div>
+
         </div>
+
         <div class="h-px border border-gray-300 "></div>
         <div class="p-4 text-[#64748B] text-sm font-semibold space-y-1">
           <p>Details of id: ${card.id}  </p>
@@ -55,3 +61,48 @@ const displayCard = (cards) => {
   });
 }
 
+const activeAll = () => {
+  const all = document.getElementById("select-all");
+  const s = all.classList.add("active")
+  
+}
+
+
+const removeActiveSelector = () => {
+  const selectList = document.querySelectorAll(".sl");
+  selectList.forEach(cls => { 
+    cls.classList.remove("active");
+  })
+  
+}
+
+
+
+const selectAllBtn = document.getElementById("select-all");
+
+selectAllBtn.addEventListener("click", () => {
+  console.log("all ");
+  removeActiveSelector();
+  selectAllBtn.classList.add("active")
+});
+
+
+const selectOpenBtn = document.getElementById("select-open");
+
+selectOpenBtn.addEventListener("click", () => {
+  console.log("open");
+  removeActiveSelector();
+  selectOpenBtn.classList.add("active")
+});
+
+
+const selectClosedBtn = document.getElementById("select-closed");
+
+selectClosedBtn.addEventListener("click", () => {
+  console.log("close");
+  removeActiveSelector();
+  selectClosedBtn.classList.add("active")
+});
+
+
+activeAll();
