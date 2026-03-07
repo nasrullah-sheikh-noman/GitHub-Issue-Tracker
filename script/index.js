@@ -9,7 +9,7 @@ loginBtn.addEventListener("click", () => {
 
   
 
-  if (username.toLowerCase() === "admin" && password.toLowerCase() === 'a') {
+  if (username.toLowerCase() === "admin" && password.toLowerCase() === 'admin123') {
     alert("login successful")
     window.location.assign("./home.html")
   } else {

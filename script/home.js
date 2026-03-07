@@ -14,9 +14,14 @@ const displayCard = (cards) => {
   const cardContainer = document.getElementById("card-container");
 
   cards.forEach(card => {
+
     const createDiv = document.createElement("div");
-    const apiTime = card.createdAt;
-    const dateTime = new Date(apiTime).toLocaleDateString();
+
+    const apiCreateTime = card.createdAt;
+    const dateCreateTime = new Date(apiCreateTime).toLocaleDateString();
+
+    const apiUpdateTime = card.updatedAt;
+    const dateUpdateTime = new Date(apiUpdateTime).toLocaleDateString();
     
     createDiv.innerHTML = `
       <div class=" shadow-sm  border border-gray-300 rounded-md h-full ">
@@ -25,7 +30,7 @@ const displayCard = (cards) => {
             <div>
               <img class="w-8" src="../assets/${card.status == "open" ? card.status : card.status}-Status.png" alt="" >
             </div>
-            <h4 class="bg-[#EF444430] rounded-full px-7 py-1 font-semibold text-red-500">${card.priority}</h4>
+            <h4 class="bg-[#EF4444${card.priority == "high" ? 70 : card.priority == "medium" ? 40 : 25}] rounded-full px-7 py-1 font-semibold text-red-500">${card.priority}</h4>
           </div>
           <h2 class="text-lg font-semibold">${card.title}</h2>
           <p class="text-sm">${card.description}</p>
@@ -35,9 +40,12 @@ const displayCard = (cards) => {
           </div>
         </div>
         <div class="h-px border border-gray-300 "></div>
-        <div class="p-4 text-[#64748B] text-sm font-semibold">
-          <p>#${card.id} by ${card.author}</p>
-          <p>${dateTime}</p>
+        <div class="p-4 text-[#64748B] text-sm font-semibold space-y-1">
+          <p>Details of id: ${card.id}  </p>
+          <p>Author : ${card.author}</p>
+          <p>Assignee : ${card.assignee ? card.assignee : "Not assigned anyone"}</p>
+          <p>Created time : ${dateCreateTime}</p>
+          <p>Updated time : ${dateUpdateTime ? dateUpdateTime : "Don't update this id"}</p>
         </div>
       </div>
     `;
