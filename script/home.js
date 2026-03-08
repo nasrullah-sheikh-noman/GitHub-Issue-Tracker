@@ -78,11 +78,14 @@ const spinner = (status) => {
 }
 
 
+
+
 const searchBtn = document.getElementById("search-btn")
 const searchInput = document.getElementById("search-input");
 
 searchBtn.addEventListener("click", () => {
   spinner(true);
+
   const searchValue = searchInput.value.trim().toLowerCase();
 
 
@@ -90,38 +93,40 @@ searchBtn.addEventListener("click", () => {
   const cardContainer = document.getElementById("card-container");
   cardContainer.innerHTML = "";
 
-  const allCards = (cards) => {
-    count = 0;
-    const filterCard = cards.filter(card => {
+  fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`)
+    .then((res) => res.json())
+    .then((data) => {
+      const cards = data.data;
 
-      console.log(card);
+      const filterCard = cards.filter(card => {
+
+        const openBtn = document.getElementById("select-open");
+        const closedBtn = document.getElementById("select-closed");
 
 
-      card.title.toLowerCase().includes(searchValue)
-    }
-    );
+        if (openBtn.classList.contains("active")) {
 
-    filterCard.forEach(card => {
-      count+=1;
-      const div = document.createElement("div");
+          return card.status == "open" && 
+           card.title.toLowerCase().includes(searchValue)
 
-      const apiCreateTime = card.createdAt;
-      const dateCreateTime = new Date(apiCreateTime).toLocaleDateString();
+        } else if (closedBtn.classList.contains("active")) {
 
-      const apiUpdateTime = card.updatedAt;
-      const dateUpdateTime = new Date(apiUpdateTime).toLocaleDateString();
+          return card.status == "closed" && 
+            card.title.toLowerCase().includes(searchValue)
 
-      div.innerHTML = displayHtml(card, dateCreateTime, dateUpdateTime);
+        } else {
+          return card.title.toLowerCase().includes(searchValue)
+        };
 
-      cardContainer.appendChild(div);
+        
+      });
+
+      displayCard(filterCard);
+      document.getElementById("card-count").innerText = filterCard.length;
+      spinner(false);
 
     });
-    console.log(count);
-    document.getElementById("card-count").innerText = count;
-    spinner(false);
-  }
-  fetchData(allCards);
-  
+
 });
 
 
@@ -191,8 +196,8 @@ selectAllBtn.addEventListener("click", () => {
   cardContainer.innerHTML = "";
 
   const allCards = (cards) => {
-  
-   displayAllCount(cards);
+
+    displayAllCount(cards);
 
     cards.forEach(card => {
       if (card.status == "open" || card.status == "closed") {
@@ -230,8 +235,8 @@ selectOpenBtn.addEventListener("click", () => {
   cardContainer.innerHTML = "";
 
   const allOpenCards = (cards) => {
-    
-   displayOpenCount(cards);
+
+    displayOpenCount(cards);
 
     cards.forEach(card => {
       if (card.status === "open") {
@@ -291,7 +296,7 @@ selectClosedBtn.addEventListener("click", () => {
 
   }
 
-  
+
   fetchData(allClosedCards);
 
 });
