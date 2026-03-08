@@ -64,8 +64,34 @@ const displayCard = (cards) => {
 }
 
 
-const searchInput = document.getElementById("search-input");
-console.log(searchInput.value);
+
+
+  const searchBtn = document.getElementById("search-btn")
+  const searchInput = document.getElementById("search-input");
+
+  searchBtn.addEventListener("click", () => {
+    const searchValue = searchInput.value;
+      const url = ("https://phi-lab-server.vercel.app/api/v1/lab/issues");
+
+      fetch(url)
+        .then(res => res.json())
+        .then(data => {
+          allCards(data.data)
+        });
+
+      const cardContainer = document.getElementById("card-container");
+      cardContainer.innerHTML = "";
+
+      const allCards = (cards) => {
+        const filterCard = cards.filter(card => card == searchValue )
+
+        filterCard.forEach(card => {
+          console.log(card);
+        })
+      }
+    
+  });
+
 
 
 const activeAll = () => {
