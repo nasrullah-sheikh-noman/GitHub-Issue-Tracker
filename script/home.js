@@ -83,7 +83,7 @@ const searchInput = document.getElementById("search-input");
 
 searchBtn.addEventListener("click", () => {
   spinner(true);
-  const searchValue = searchInput.value;
+  const searchValue = searchInput.value.trim().toLowerCase();
 
 
 
@@ -91,11 +91,18 @@ searchBtn.addEventListener("click", () => {
   cardContainer.innerHTML = "";
 
   const allCards = (cards) => {
-    const filterCard = cards.filter(card =>
-      card.title.toLowerCase().includes(searchValue.toLowerCase())
+    count = 0;
+    const filterCard = cards.filter(card => {
+
+      console.log(card);
+
+
+      card.title.toLowerCase().includes(searchValue)
+    }
     );
 
     filterCard.forEach(card => {
+      count+=1;
       const div = document.createElement("div");
 
       const apiCreateTime = card.createdAt;
@@ -109,9 +116,12 @@ searchBtn.addEventListener("click", () => {
       cardContainer.appendChild(div);
 
     });
-    fetchData(allCards);
+    console.log(count);
+    document.getElementById("card-count").innerText = count;
+    spinner(false);
   }
-  spinner(false);
+  fetchData(allCards);
+  
 });
 
 
