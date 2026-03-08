@@ -2,7 +2,9 @@ const url = ("https://phi-lab-server.vercel.app/api/v1/lab/issues");
 
 fetch(url)
   .then(res => res.json())
-  .then(data => displayCard(data.data))
+  .then(data => {
+    displayCard(data.data);
+  })
 
 
 
@@ -76,33 +78,89 @@ const removeActiveSelector = () => {
   
 }
 
+const displayAllCount = (infos) => {
+  const cardCount = document.getElementById("card-count");
+
+  infos.forEach(info => {
+    const countNumber =  info.id;
+    cardCount.innerText = countNumber;
+  })
+}
+
+
+const displayOpenCount = (infos) => {
+  const cardCount = document.getElementById("card-count");
+
+  let counts = 0;
+
+  infos.forEach(info => {
+    const countNumber =  info.status;
+    
+    if (countNumber == "open") {
+      counts = counts + 1;
+    }
+    cardCount.innerText = counts;
+  })
+}
+
+const displayClosedCount = (infos) => {
+  const cardCount = document.getElementById("card-count");
+
+  let counts = 0;
+
+  infos.forEach(info => {
+    const countNumber =  info.status;
+    
+    if (countNumber == "closed") {
+      counts = counts + 1;
+    }
+    cardCount.innerText = counts;
+  })
+}
+
 
 
 const selectAllBtn = document.getElementById("select-all");
 
 selectAllBtn.addEventListener("click", () => {
-  console.log("all ");
   removeActiveSelector();
   selectAllBtn.classList.add("active")
+
+   const url = ("https://phi-lab-server.vercel.app/api/v1/lab/issues");
+
+  fetch(url)
+  .then(res => res.json())
+  .then(data => displayAllCount(data.data));
+
 });
 
 
 const selectOpenBtn = document.getElementById("select-open");
 
 selectOpenBtn.addEventListener("click", () => {
-  console.log("open");
   removeActiveSelector();
   selectOpenBtn.classList.add("active")
+
+  const url = ("https://phi-lab-server.vercel.app/api/v1/lab/issues");
+
+  fetch(url)
+  .then(res => res.json())
+  .then(data => displayOpenCount(data.data));
+
 });
 
 
 const selectClosedBtn = document.getElementById("select-closed");
 
 selectClosedBtn.addEventListener("click", () => {
-  console.log("close");
   removeActiveSelector();
-  selectClosedBtn.classList.add("active")
-});
+  selectClosedBtn.classList.add("active");
 
+  const url = ("https://phi-lab-server.vercel.app/api/v1/lab/issues");
+
+  fetch(url)
+  .then(res => res.json())
+  .then(data => displayClosedCount(data.data));
+});
 
 activeAll();
