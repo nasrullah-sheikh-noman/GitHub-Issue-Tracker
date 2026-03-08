@@ -63,6 +63,11 @@ const displayCard = (cards) => {
   });
 }
 
+
+const searchInput = document.getElementById("search-input");
+console.log(searchInput.value);
+
+
 const activeAll = () => {
   const all = document.getElementById("select-all");
   const s = all.classList.add("active")
