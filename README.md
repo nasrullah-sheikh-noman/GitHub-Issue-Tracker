@@ -1,6 +1,6 @@
 ## Question 1: What is the difference between var, let, and const?
 
-# Ans: Var is a global-scoped variable, it can be redeclared and reassigned. Let is block-scoped, it can't be redeclared but it can be reassigned. Const is also block-scoped, it can't be redeclared or reassigned.
+### Ans: Var is a global-scoped variable, it can be redeclared and reassigned. Let is block-scoped, it can't be redeclared but it can be reassigned. Const is also block-scoped, it can't be redeclared or reassigned.
 
 
 
