@@ -18,19 +18,22 @@ const modalData = (card) => {
   const modalDataContainer = document.getElementById("modal-data");
 
   const apiCreateTime = card.createdAt;
-    const dateCreateTime = new Date(apiCreateTime).toLocaleDateString();
+  const dateCreateTime = new Date(apiCreateTime).toLocaleDateString();
 
-    const apiUpdateTime = card.updatedAt;
-    const dateUpdateTime = new Date(apiUpdateTime).toLocaleDateString()
+  const apiUpdateTime = card.updatedAt;
+  const dateUpdateTime = new Date(apiUpdateTime).toLocaleDateString()
 
   modalDataContainer.innerHTML = `
+
     <h2 class="text-lg font-semibold">${card.title}</h2>
-    <div class="fiex">
+
+    <div class="flex items-center gap-3">
       <h4 class="bg-${card.status == "open" ? "green" : "blue"}-600 rounded-full text-white w-24 px-3 py-1 text-md font-semibold hover:scale-120 duration-300 text-center ">${card.status}</h4>
-      <h4 class="text-gray-500 text-sm">Opened by Fahim Ahmed</h4>
+      <h4 class="text-gray-500 text-sm">Author: ${card.author}</h4>
       <h4 class="text-gray-500">Create date: ${dateCreateTime}</h4>
       <h4 class="text-gray-500">Update date: ${dateUpdateTime}</h4>
     </div>
+
     <div class="gap-3 flex flex-wrap">
 
       <div class=" py-1 px-2 font-semibold rounded-full bg-[#dd5aabab] text-[#8f055aaf] border border-red-300 hover:scale-115 duration-300"><span><i class="${card.labels[0] == "bug" ? `fa-solid fa-bug` : card.labels[0] == "enhancement" ? `fa-solid fa-maximize` : card.labels[0] == "documentation" ? `fa-solid fa-book-medical` : ""}"></i></span>${card.labels[0]}</div>
@@ -39,15 +42,15 @@ const modalData = (card) => {
 
     </div>
 
-    <p class="text-sm">${card.description}</p>
+    <p class="text-md text-gray-500">${card.description}</p>
 
-    <div>
-      <div>
-        <h4>Assignee:</h4>
-        <h2>Fahim Ahmed</h2>
+    <div class="flex  items-center">
+      <div class="space-y-1">
+        <h4 class="text-lg">Assignee:</h4>
+        <h2 class="text-md font-semibold">${card.assignee ? card.assignee : "No assigned anyone"}</h2>
       </div>
-      <div>
-        <h4>Priority:</h4>
+      <div class="mx-auto space-y-1">
+        <h4 class="text-lg">Priority:</h4>
         <h4 class="bg-[#EF4444${card.priority == "high" ? 70 : card.priority == "medium" ? 40 : 25}] rounded-full px-7 py-1 font-semibold text-red-500 hover:scale-120 duration-300">${card.priority}</h4>
       </div>
     </div>
