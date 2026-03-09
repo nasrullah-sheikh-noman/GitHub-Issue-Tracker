@@ -8,6 +8,7 @@ const fetchData = (callback) => {
 
 
 const displayCardDetails = async (id) => {
+  spinner(true);
   const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
   const data = await fetch(url);
   const details = await data.json();
@@ -15,6 +16,8 @@ const displayCardDetails = async (id) => {
 }
 
 const modalData = (card) => {
+
+
   const modalDataContainer = document.getElementById("modal-data");
 
   const apiCreateTime = card.createdAt;
@@ -56,6 +59,8 @@ const modalData = (card) => {
     </div>
 
   `;
+
+  spinner(false);
 
   document.getElementById("modal_container").showModal();
 }
