@@ -7,9 +7,52 @@ const fetchData = (callback) => {
 };
 
 
+const displayCardDetails = async (id) => {
+  const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
+  const data = await fetch(url);
+  const details = await data.json();
+  modalData(details.data);
+}
+
+const modalData = (card) => {
+  const modalDataContainer = document.getElementById("modal-data");
+  modalDataContainer.innerHTML = `
+    <h2>Fix broken image uploads</h2>
+    <div>
+      <h4>Open</h4>
+      <h4>Opened by Fahim Ahmed</h4>
+      <h4>22/02/2026</h4>
+    </div>
+    <div class="gap-3 flex flex-wrap">
+
+      <div class=" py-1 px-2 font-semibold rounded-full bg-[#dd5aabab] text-[#8f055aaf] border border-red-300 hover:scale-115 duration-300"><span><i class="${card.labels[0] == "bug" ? `fa-solid fa-bug` : card.labels[0] == "enhancement" ? `fa-solid fa-maximize` : card.labels[0] == "documentation" ? `fa-solid fa-book-medical` : ""}"></i></span>${card.labels[0]}</div>
+
+      <div class="py-1 px-2 font-semibold hover:scale-115 duration-300 rounded-full bg-orange-${card.labels[1] ? 100 : 0} text-orange-400 ${card.labels[1] ? "border" : ""} border-orange-300"><span><i class="${card.labels[1] == "help wanted" ? `fa-solid fa-circle-xmark` : card.labels[1] == "good first issue" ? `fa-solid fa-cannabis` : card.labels[1] == "enhancement" ? "fa-solid fa-maximize" : ""}"></i></span>${card.labels[1] ? card.labels[1] : ""}</div>
+
+    </div>
+
+    <p class="text-sm">${card.description}</p>
+
+    <div>
+      <div>
+        <h4>Assignee:</h4>
+        <h2>Fahim Ahmed</h2>
+      </div>
+      <div>
+        <h4>Priority:</h4>
+        <h4 class="bg-[#EF4444${card.priority == "high" ? 70 : card.priority == "medium" ? 40 : 25}] rounded-full px-7 py-1 font-semibold text-red-500 hover:scale-120 duration-300">${card.priority}</h4>
+      </div>
+    </div>
+
+  `;
+
+  document.getElementById("modal_container").showModal();
+}
+
+
 const displayHtml = (card, dateCreateTime, dateUpdateTime) => {
   return `
-      <div class = "crd shadow-sm flex-1 border border-gray-300 rounded-xl h-full hover:scale-105 duration-300  border-t-${card.status === "open" ? "green" : "blue"}-600 border-t-6 pt-5">
+      <div onclick="displayCardDetails(${card.id})" class = "crd shadow-sm flex-1 border border-gray-300 rounded-xl h-full hover:scale-105 duration-300  border-t-${card.status === "open" ? "green" : "blue"}-600 border-t-6 pt-5">
         <div class=" space-y-4 p-4">
           <div class="flex justify-between ">
             <div>
