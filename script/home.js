@@ -16,12 +16,20 @@ const displayCardDetails = async (id) => {
 
 const modalData = (card) => {
   const modalDataContainer = document.getElementById("modal-data");
+
+  const apiCreateTime = card.createdAt;
+    const dateCreateTime = new Date(apiCreateTime).toLocaleDateString();
+
+    const apiUpdateTime = card.updatedAt;
+    const dateUpdateTime = new Date(apiUpdateTime).toLocaleDateString()
+
   modalDataContainer.innerHTML = `
-    <h2>Fix broken image uploads</h2>
-    <div>
-      <h4>Open</h4>
-      <h4>Opened by Fahim Ahmed</h4>
-      <h4>22/02/2026</h4>
+    <h2 class="text-lg font-semibold">${card.title}</h2>
+    <div class="fiex">
+      <h4 class="bg-${card.status == "open" ? "green" : "blue"}-600 rounded-full text-white w-24 px-3 py-1 text-md font-semibold hover:scale-120 duration-300 text-center ">${card.status}</h4>
+      <h4 class="text-gray-500 text-sm">Opened by Fahim Ahmed</h4>
+      <h4 class="text-gray-500">Create date: ${dateCreateTime}</h4>
+      <h4 class="text-gray-500">Update date: ${dateUpdateTime}</h4>
     </div>
     <div class="gap-3 flex flex-wrap">
 
